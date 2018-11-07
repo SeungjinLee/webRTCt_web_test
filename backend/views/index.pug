@@ -1,7 +1,24 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div.cover-container.d-flex.w-100.h-100.p-3.mx-auto.flex-column.text-center
+    div.mb-auto
+    main.inner.cover(role="main")
+      div(style="margin-bottom: -50px; margin-left: 120px;")
+        img.img-fluid.animated.tada.infinite(src="imgs/main/baseline-ring_volume-24px.svg" width="100px" height="100px")
+      div
+      div
+        img.img-fluid(src="imgs/main/appMain.svg" alt="main")
+      div
+          form
+            div.form-group
+              input.form-control.border-0.text-center(type="text" placeholder="NickName")
+      div
+        button.btn.btn-outline-dark.border.f-bold(type="button" onclick="enterCallMe();") Enter
+    script(type="text/javascript").
+      function enterCallMe(){
+        console.log("enterCallMe");
+        modalPop('Notification','The same ID exists.');
+      }
 
-  include ./footer.pug
+    include ./footer.pug

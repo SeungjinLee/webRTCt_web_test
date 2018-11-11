@@ -12,13 +12,31 @@ block content
       div
           form
             div.form-group
-              input.form-control.border-0.text-center(type="text" placeholder="NickName")
+              input.form-control.border-0.text-center#nickName(type="text" placeholder="NickName")
       div
-        button.btn.btn-outline-dark.border.f-bold(type="button" onclick="enterCallMe();") Enter
+        button.btn.btn-outline-dark.border.f-bold#enterBtn(type="button") Enter
     script(type="text/javascript").
-      function enterCallMe(){
-        console.log("enterCallMe");
-        modalPop('Notification','The same ID exists.');
-      }
+
+      $(function(){
+        var socket = io(); 
+
+        $("#enterBtn").click(function() {
+          console.log(socket);
+          socket.emit("enter", {
+            nickName: $('#nickName').val()
+          });
+        });
+
+        socket.on("enter", function(data) {
+          console.log(data);
+          if(data.overlap){
+            modalPop('Notification','The same ID exists.');
+          }else{
+          }
+        });
+
+
+      });
+      
 
     include ./footer.pug

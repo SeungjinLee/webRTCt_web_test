@@ -5,38 +5,49 @@ block content
     div.mb-auto
     main.inner.cover(role="main")
       div(style="margin-bottom: -50px; margin-left: 120px;")
-        img.img-fluid.animated.tada.infinite(src="imgs/main/baseline-ring_volume-24px.svg" width="100px" height="100px")
+        img.img-fluid.animated.tada.infinite(src="/imgs/main/baseline-ring_volume-24px.svg" width="100px" height="100px")
       div
       div
-        img.img-fluid(src="imgs/main/appMain.svg" alt="main")
+        img.img-fluid(src="/imgs/main/appMain.svg" alt="main")
       div
-          form
+          form#frm(action="/user/list" method="POST")
             div.form-group
-              input.form-control.border-0.text-center#nickName(type="text" placeholder="NickName")
+              input.form-control.border-0.text-center#nickname(name="nickname" type="text" placeholder="NickName")
       div
         button.btn.btn-outline-dark.border.f-bold#enterBtn(type="button") Enter
     script(type="text/javascript").
-
       $(function(){
-        var socket = io(); 
-
         $("#enterBtn").click(function() {
-          console.log(socket);
-          socket.emit("enter", {
-            nickName: $('#nickName').val()
-          });
+          $.post('/check', $("#frm").serialize(), function(res) {
+            console.log(res);
+            if(res && res.check === 1){
+              $("#frm").submit();
+            }else{
+              modalPop('Notification','The same nickname exists.');
+            }
+          }, 'json');
         });
-
-        socket.on("enter", function(data) {
-          console.log(data);
-          if(data.overlap){
-            modalPop('Notification','The same ID exists.');
-          }else{
-          }
-        });
-
-
       });
+
+      //- $(function(){
+      //-   var socket = io();
+
+      //-   $("#enterBtn").click(function() {
+      //-     console.log(socket);
+      //-     socket.emit("enter", {
+      //-       nickName: $('#nickName').val()
+      //-     });
+      //-   });
+
+      //-   socket.on("enter", function(data) {
+      //-     console.log(data);
+      //-     if(data.overlap){
+      //-       modalPop('Notification','The same nickname exists.');
+      //-     }else{
+      //-       location.href = "/enter?nickname="+data.nickName;
+      //-     }
+      //-   });
+      //- });
       
 
     include ./footer.pug

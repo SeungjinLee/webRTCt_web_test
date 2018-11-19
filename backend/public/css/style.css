@@ -4,8 +4,8 @@ html,body {
   font-weight: 400;
 }
 body {
-  display: -ms-flexbox;
-  display: flex;
+  min-height: 75rem;
+  padding-top: 10rem;
 }
 .f-bold {
   font-family: SegoeUI-Bold, Segoe UI;
@@ -23,45 +23,27 @@ body {
 /*
  * Header
  */
- .masthead {
-  margin-bottom: 2rem;
+.site-header {
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 1);
 }
-
-.masthead-brand {
-  margin-bottom: 0;
+.site-header a {
+  color: #999;
+  transition: ease-in-out color .15s;
 }
-
-.nav-masthead .nav-link {
-  padding: .25rem 0;
-  font-weight: 700;
-  color: rgba(255, 255, 255, .5);
-  background-color: transparent;
-  border-bottom: .25rem solid transparent;
-}
-
-.nav-masthead .nav-link:hover,
-.nav-masthead .nav-link:focus {
-  border-bottom-color: rgba(255, 255, 255, .25);
-}
-
-.nav-masthead .nav-link + .nav-link {
-  margin-left: 1rem;
-}
-
-.nav-masthead .active {
+.site-header a:hover {
   color: #fff;
-  border-bottom-color: #fff;
+  text-decoration: none;
 }
-
-@media (min-width: 48em) {
-  .masthead-brand {
-    float: left;
-  }
-  .nav-masthead {
-    float: right;
-  }
+.header-main{
+  
 }
-
+.header-sub{
+  margin-top: 25px;
+}
+.header-search{
+  /* margin-top: 5px; */
+}
 
 /*
  * Cover

@@ -4,7 +4,7 @@ block content
   div.cover-container.d-flex.w-100.h-100.p-3.mx-auto.flex-column.text-center
     div.mb-auto
     main.inner.cover(role="main")
-      div(style="margin-bottom: -50px; margin-left: 120px;")
+      div(style="margin-bottom: -40px; margin-left: 100px;")
         img.img-fluid.animated.tada.infinite(src="/imgs/main/baseline-ring_volume-24px.svg" width="100px" height="100px")
       div
       div
@@ -18,14 +18,18 @@ block content
     script(type="text/javascript").
       $(function(){
         $("#enterBtn").click(function() {
-          $.post('/check', $("#frm").serialize(), function(res) {
-            console.log(res);
-            if(res && res.check === 1){
-              $("#frm").submit();
-            }else{
-              modalPop('Notification','The same nickname exists.');
-            }
-          }, 'json');
+          if($("#nickname").val()){
+            $.post('/check', $("#frm").serialize(), function(res) {
+              console.log(res);
+              if(res && res.check === 1){
+                $("#frm").submit();
+              }else{
+                modalPop('Notification','The same nickname exists.');
+              }
+            }, 'json');
+          }else{
+            modalPop('Notification','Input Nickname');
+          }
         });
       });
 

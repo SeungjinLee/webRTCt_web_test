@@ -4,8 +4,8 @@ html,body {
   font-weight: 400;
 }
 body {
-  min-height: 75rem;
-  padding-top: 10rem;
+  /* min-height: 75rem;
+  padding-top: 4.5rem; */
 }
 .f-bold {
   font-family: SegoeUI-Bold, Segoe UI;
@@ -42,7 +42,8 @@ body {
   margin-top: 25px;
 }
 .header-search{
-  /* margin-top: 5px; */
+  margin-top: 10px;
+  border-bottom: 1px solid #ccc
 }
 
 /*

@@ -3,20 +3,56 @@ extends layout
 block content
 
   include ./header.pug
-  div.p-2.bd-highlight Flex item
-  div.p-2.bd-highlight Flex item
-  div.p-2.bd-highlight Flex item
-  //- p 안녕 / #{nickname}
-  //- form#frm
-  //-   input#nickname(name="nickname" type="hidden" value=nickname)
-
-  //- script(type="text/javascript").
-  //-     $(function(){
-  //-       var chat = io("/chat");
-  //-       chat.emit("enter", {
-  //-         nickname : $('#nickname').val()
-  //-       });
-  //-       chat.on("update", function(data) {
-  //-         console.log(data);
-  //-       });
-  //-     });
+  form#frm
+    input#nickname(type="hidden" value=nickname)
+  div.list-content
+    ul.list-group
+      li.list-group-item.border-0#user_item_clone(style="display:none;")
+        div.d-flex.justify-content-between.align-items-center
+          div.l-img
+            img(src="/imgs/icon/ic_record_voice_over_24px.svg" height="35px")
+            div.l-id.float-right.ml-3
+              h3.f-bold
+          div.l-info
+            span.text-black-50(style="font-size: 0.8rem;")
+            div.text-black.f-bold(style="font-size: 0.8rem;")
+          
+  script(type="text/javascript").
+      $(function(){
+        var chat = io("/chat");
+        chat.emit("enter", {
+          nickname : $('#nickname').val()
+        });
+        //접속자확인
+        chat.on("enter", function(data) {
+          var userTotal = 0;
+          var userCall = 0;
+          var userStandBy = 0;
+          userTotal = data.length;
+          $("#user_item_clone").nextAll().remove();
+          data.reverse().forEach(function(item) {
+            var userItemClone = $("#user_item_clone").clone();
+            var imgPath = "";
+            var callName = "";
+            if(!item.call_check){
+              imgPath="/imgs/icon/outline-voice_over_off-24px.svg";
+              callName="대기 중";
+              userStandBy++;
+            }else{
+              imgPath="/imgs/icon/ic_record_voice_over_24px.svg";
+              callName="대화 중";
+              userCall++;
+            }
+            $(userItemClone).attr("id", "user_item");
+            $(userItemClone).find(".l-img img").attr("src", imgPath);
+            $(userItemClone).find(".l-img h3").text(item.nickname);
+            $(userItemClone).find(".l-info div").text(callName);
+            $(userItemClone).find(".l-info span").text(item.join_date);
+            $(userItemClone).show();
+            $('.list-group').append(userItemClone);
+          });
+          $('#userTotal').text(userTotal);
+          $('#userStandBy').text(userStandBy);
+          $('#userCall').text(userCall);
+        });
+      });

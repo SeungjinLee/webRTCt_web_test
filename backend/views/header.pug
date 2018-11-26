@@ -2,7 +2,7 @@ nav.fixed-top.site-header
   div.d-flex.justify-content-between.header-main
     a(href="#")
       img(src="/imgs/main/appMain.svg" height="30px")
-    a.float-right(href="#") 
+    a.float-right#callMeExit(href="#")
       img(src="/imgs/icon/ic_exit_to_app_24px.svg" height="20px")
   div.d-flex.justify-content-between.header-sub
     div.container.text-center
@@ -14,7 +14,7 @@ nav.fixed-top.site-header
           span.text-black-50(style="font-size: 0.8rem;") 총 접속
       div.row
         div.col-sm(style="margin-top: 10px;")
-          span.f-bold 14
+          span.f-bold#userTotal 0
     div.container.text-center
       div.row
         div.col-sm
@@ -24,7 +24,7 @@ nav.fixed-top.site-header
           span.text-black-50(style="font-size: 0.8rem;") 대화 중
       div.row
         div.col-sm(style="margin-top: 10px;")
-          span.f-bold 1
+          span.f-bold#userCall 0
     div.container.text-center
       div.row
         div.col-sm
@@ -34,8 +34,12 @@ nav.fixed-top.site-header
           span.text-black-50(style="font-size: 0.8rem;") 대기 중
       div.row
         div.col-sm(style="margin-top: 10px;")
-          span.f-bold 12
+          span.f-bold#userStandBy 0
   div.d-flex.justify-content-between.header-search
-    input.border-0(type="text" placeholder="Search" style="width: 100%;")
-    a.float-right(href="#") 
-      img(src="/imgs/icon/ic_exit_to_app_24px.svg" height="20px")
+    input.border-0.text-center(type="text" placeholder="Search" style="width: 100%;font-size: 14px;")
+
+  script(type="text/javascript").
+    $("#callMeExit").on('click', function(e){
+      e.preventDefault();
+      location.href = '/user/exit'
+    });

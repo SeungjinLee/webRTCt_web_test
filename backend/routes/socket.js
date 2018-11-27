@@ -14,6 +14,11 @@ module.exports = {
         console.log(connectList); 
         chat.emit("enter", connectList);
       });
+      socket.on('request', function(data) {
+        console.log(data);
+        var msgData = connectList[connectList.findIndex(x => x.sid === socket.id)]
+        socket.to(data.otherUserSid).emit('request', msgData);
+      });
       socket.on('forceDisconnect', function() {
         socket.disconnect();
         var pos = connectList.findIndex(x => x.sid === socket.id);

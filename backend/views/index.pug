@@ -32,25 +32,4 @@ block content
         });
       });
 
-      //- $(function(){
-      //-   var socket = io();
-
-      //-   $("#enterBtn").click(function() {
-      //-     console.log(socket);
-      //-     socket.emit("enter", {
-      //-       nickName: $('#nickName').val()
-      //-     });
-      //-   });
-
-      //-   socket.on("enter", function(data) {
-      //-     console.log(data);
-      //-     if(data.overlap){
-      //-       modalPop('Notification','The same nickname exists.');
-      //-     }else{
-      //-       location.href = "/enter?nickname="+data.nickName;
-      //-     }
-      //-   });
-      //- });
-      
-
     include ./footer.pug
